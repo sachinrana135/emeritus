@@ -1,0 +1,29 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: USER-SERVICE
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user/**
+          filters:
+            - JwtAuthenticationFilter
+        - id: COURSE-SERVICE
+          uri: lb://COURSE-SERVICE
+          predicates:
+            - Path=/course/**
+          filters:
+            - JwtAuthenticationFilter
+        - id: ASSIGNMENT-SERVICE
+          uri: lb://ASSIGNMENT-SERVICE
+          predicates:
+            - Path=/assignment/**
+          filters:
+            - JwtAuthenticationFilter
+  config:
+    import: optional:configserver:http://CONFIG-SERVER

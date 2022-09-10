@@ -1,0 +1,27 @@
+server:
+  port: 9052
+  servlet:
+    context-path: /assignment
+
+spring:
+  application:
+    name: ASSIGNMENT-SERVICE
+  datasource:
+    driverClassName: org.h2.Driver
+    password: password
+    url: jdbc:h2:mem:emeritus
+    username: sa
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+  config:
+    import: optional:configserver:http://CONFIG-SERVER
