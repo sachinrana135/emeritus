@@ -25,3 +25,10 @@ spring:
         show_sql: true
   config:
     import: optional:configserver:http://CONFIG-SERVER
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: full
+

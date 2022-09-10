@@ -1,6 +1,7 @@
 package com.sachin.emeritus.user.vo;
 
 import com.sachin.emeritus.user.entity.User;
+import com.sachin.emeritus.user.enums.Role;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -25,7 +26,7 @@ public class UserSpecification implements Specification<User> {
         List<Predicate> predicates = new ArrayList<>();
         if (nonNull(filter.getRole())) {
             predicates.add(criteriaBuilder.equal(
-                    root.get("role").get("userRole"), filter.getRole()));
+                    root.get("role"), Role.roleType(filter.getRole())));
         }
         return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }

@@ -1,5 +1,6 @@
 package com.sachin.emeritus.user.controller;
 
+import com.sachin.emeritus.user.dto.GetUsersByIdRequestDto;
 import com.sachin.emeritus.user.entity.User;
 import com.sachin.emeritus.user.service.UserService;
 import com.sachin.emeritus.user.vo.PageAndSort;
@@ -14,26 +15,29 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/user")
-@PreAuthorize("hasRole('SYS_ADMIN')")
 public class UserController {
 
     @Autowired
     UserService userService;
 
     @GetMapping
-
-    @PreAuthorize("hasRole('INSTRUCTOR')")
+    @PreAuthorize("hasAnyRole('SYS_ADMIN','INSTRUCTOR')")
     public ResponseEntity<Page<User>> getAllUsers(UserFilter filter, PageAndSort pageAndSort) {
         return ResponseEntity.ok(userService.findAll(filter, pageAndSort));
     }
 
+    @PostMapping("/findByIds")
+    public ResponseEntity<List<User>> getAllUsersByIds(@RequestBody GetUsersByIdRequestDto getUsersByIdRequestDto) {
+        return ResponseEntity.ok(userService.findAllById(getUsersByIdRequestDto.userIds));
+    }
+
     @PostMapping
-    ResponseEntity<User> createUser(@RequestBody User user) {
+    @PreAuthorize("hasRole('SYS_ADMIN')")
+    ResponseEntity<Void> createUser(@RequestBody User user) {
         User savedEntity = userService.save(user);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -49,12 +53,14 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('SYS_ADMIN')")
     ResponseEntity<Void> updateEmployee(@PathVariable String id, @RequestBody User user) {
         User updatedEntity = userService.update(id, user);
         return ResponseEntity.status(OK).build();
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('SYS_ADMIN')")
     void deleteEmployee(@PathVariable String id) {
         userService.deleteById(id);
     }

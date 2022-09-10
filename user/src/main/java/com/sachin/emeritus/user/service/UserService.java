@@ -16,5 +16,5 @@ public interface UserService {
     User save(User user);
     User update(String id, User user);
     void deleteById(String id);
-
+    List<User> findAllById(List<String> userIds);
 }

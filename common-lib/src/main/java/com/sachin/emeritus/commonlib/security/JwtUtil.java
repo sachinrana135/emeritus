@@ -5,16 +5,12 @@ import com.sachin.emeritus.commonlib.security.exceptions.JwtTokenMalformedExcept
 import com.sachin.emeritus.commonlib.security.exceptions.JwtTokenMissingException;
 import com.sachin.emeritus.commonlib.security.vo.UserToken;
 import io.jsonwebtoken.*;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.Date;
-import java.util.Map;
 
-import static com.sachin.emeritus.commonlib.security.util.Claim.*;
+import static com.sachin.emeritus.commonlib.security.util.Claim.USER;
 import static com.sachin.emeritus.commonlib.security.util.Constant.SECRET;
 import static com.sachin.emeritus.commonlib.security.util.Constant.VALIDITY;
 import static org.apache.logging.log4j.util.Strings.isEmpty;
@@ -55,7 +51,10 @@ public class JwtUtil {
 
     public static String getUserRole() {
         return objectMapper.convertValue(getClaims().get(USER), UserToken.class).getRole();
+    }
 
+    public static String getUserId() {
+        return objectMapper.convertValue(getClaims().get(USER), UserToken.class).getId();
     }
 
     public static String generateToken(UserToken userToken) {
