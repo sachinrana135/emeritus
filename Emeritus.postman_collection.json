@@ -1,0 +1,950 @@
+{
+	"info": {
+		"_postman_id": "67d8e0a7-e2d6-49fe-9705-f5846f04af09",
+		"name": "Emeritus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2141799"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"token\", responseBody);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{admin_username}}\",\n    \"password\": \"{{admin_password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Access - All Roles"
+					},
+					"response": []
+				},
+				{
+					"name": "Login Instructor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"token\", responseBody);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{instructor_username}}\",\n    \"password\": \"{{instructor_password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Access - All Roles"
+					},
+					"response": []
+				},
+				{
+					"name": "Login Student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"token\", responseBody);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{student_username}}\",\n    \"password\": \"{{student_password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Access - All Roles"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"password\": \"bob@123\",\n  \"firstName\": \"Bob\",\n  \"lastName\": \"Marley\",\n  \"email\": \"bob@gmail.com\",\n  \"gender\": \"MALE\",\n  \"dob\": \"25-09-1992\",\n  \"role\": \"INSTRUCTOR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"user"
+							]
+						},
+						"description": "Access - SYS_ADMIN"
+					},
+					"response": []
+				},
+				{
+					"name": "List All Users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"password\": \"test\",\n  \"firstName\": \"test\",\n  \"lastName\": \"test\",\n  \"email\": \"s@gmail.com,\",\n  \"gender\": \"MALE\",\n  \"dob\": \"25-09-1992\",\n  \"role\": \"SYS_ADMIN\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"user"
+							]
+						},
+						"description": "Access - SYS_ADMIN, INSTRUCTOR"
+					},
+					"response": []
+				},
+				{
+					"name": "List All Students",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"password\": \"test\",\n  \"firstName\": \"test\",\n  \"lastName\": \"test\",\n  \"email\": \"s@gmail.com,\",\n  \"gender\": \"MALE\",\n  \"dob\": \"25-09-1992\",\n  \"role\": \"SYS_ADMIN\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/user?role=STUDENT",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"user"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "STUDENT"
+								}
+							]
+						},
+						"description": "Access - SYS_ADMIN, INSTRUCTOR"
+					},
+					"response": []
+				},
+				{
+					"name": "List All Instructor",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"password\": \"test\",\n  \"firstName\": \"test\",\n  \"lastName\": \"test\",\n  \"email\": \"s@gmail.com,\",\n  \"gender\": \"MALE\",\n  \"dob\": \"25-09-1992\",\n  \"role\": \"SYS_ADMIN\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/user?role=INSTRUCTOR",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"user"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "INSTRUCTOR"
+								}
+							]
+						},
+						"description": "Access - SYS_ADMIN, INSTRUCTOR"
+					},
+					"response": []
+				},
+				{
+					"name": "List All Admin",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"password\": \"test\",\n  \"firstName\": \"test\",\n  \"lastName\": \"test\",\n  \"email\": \"s@gmail.com,\",\n  \"gender\": \"MALE\",\n  \"dob\": \"25-09-1992\",\n  \"role\": \"SYS_ADMIN\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/user?role=SYS_ADMIN",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"user"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "SYS_ADMIN"
+								}
+							]
+						},
+						"description": "Access - SYS_ADMIN, INSTRUCTOR"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Course",
+			"item": [
+				{
+					"name": "Create Course",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"course_id\", responseBody);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Python Course\",\n    \"description\": \"New course on Python\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/course/course",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"course",
+								"course"
+							]
+						},
+						"description": "Access - INSTRUCTOR"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Go Course\",\n  \"description\": \"New course on Go\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/course/course/8439508b-a667-468b-a2ee-d7602cd31c8f",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"course",
+								"course",
+								"8439508b-a667-468b-a2ee-d7602cd31c8f"
+							]
+						},
+						"description": "Access - INSTRUCTOR"
+					},
+					"response": []
+				},
+				{
+					"name": "List My Courses",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/course/course?myCourse=true",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"course",
+								"course"
+							],
+							"query": [
+								{
+									"key": "myCourse",
+									"value": "true"
+								}
+							]
+						},
+						"description": "Access - INSTRUCTOR"
+					},
+					"response": []
+				},
+				{
+					"name": "List All Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/course/course",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"course",
+								"course"
+							]
+						},
+						"description": "Access - SYS_ADMIN, INSTRUCTOR"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/course/course/8439508b-a667-468b-a2ee-d7602cd31c8f",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"course",
+								"course",
+								"8439508b-a667-468b-a2ee-d7602cd31c8f"
+							]
+						},
+						"description": "Access - INSTRUCTOR"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Assignment",
+			"item": [
+				{
+					"name": "Create Assignment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Python Assignment\",\n    \"description\": \"New Assignemnt on python\",\n    \"submissionLastDate\": \"25-09-2022\",\n    \"course\" : {\n        \"id\": \"21db6b7d-e744-4476-8b97-f5630cf2ee3b\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/course/assignment",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"course",
+								"assignment"
+							]
+						},
+						"description": "Access - INSTRUCTOR"
+					},
+					"response": []
+				},
+				{
+					"name": "Submit Assignment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Kotlin Course\",\n    \"description\": \"New course on Kotlin\",\n    \"submissionLastDate\": \"25-09-2022\",\n    \"course\" : {\n        \"id\": \"\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/course/assignment/8b5c56dd-185f-4942-a84d-68dbd0bb22b1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"course",
+								"assignment",
+								"8b5c56dd-185f-4942-a84d-68dbd0bb22b1"
+							]
+						},
+						"description": "Access - STUDENT"
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Assignment to Student",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"331b759b-49f5-4fab-898a-902040607b54\",\n    \"assignment\": {\n        \"id\" : \"55d32f6a-c7c6-4523-8547-c9e08a998a51\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/course/assignment/assign",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"course",
+								"assignment",
+								"assign"
+							]
+						},
+						"description": "Access - INSTRUCTOR"
+					},
+					"response": []
+				},
+				{
+					"name": "List My Assignment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/course/assignment",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"course",
+								"assignment"
+							]
+						},
+						"description": "Access - STUDENT"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Enrollment",
+			"item": [
+				{
+					"name": "Enroll User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"courseId\": \"21db6b7d-e744-4476-8b97-f5630cf2ee3b\",\n  \"userId\": \"331b759b-49f5-4fab-898a-902040607b54\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/course/enrollment/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"course",
+								"enrollment",
+								""
+							]
+						},
+						"description": "Access - STUDENT"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Users by course",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"courseId\": \"test\",\n  \"userId\": \"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/course/enrollment//course/8234eca2-6e1c-468b-b186-afaa2813d520/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"course",
+								"enrollment",
+								"",
+								"course",
+								"8234eca2-6e1c-468b-b186-afaa2813d520",
+								"user"
+							]
+						},
+						"description": "Access - SYS_ADMIN, INSTRUCTOR"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Course of User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"courseId\": \"test\",\n  \"userId\": \"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/course/enrollment//user/0974fdd5-ff70-4401-9e07-309d601ea1ef/course",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"course",
+								"enrollment",
+								"",
+								"user",
+								"0974fdd5-ff70-4401-9e07-309d601ea1ef",
+								"course"
+							]
+						},
+						"description": "Access - All"
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Course",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"courseId\": \"test\",\n  \"userId\": \"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/course/enrollment//user/course",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"course",
+								"enrollment",
+								"",
+								"user",
+								"course"
+							]
+						},
+						"description": "Access- STUDENT"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:9000",
+			"type": "string"
+		},
+		{
+			"key": "admin_username",
+			"value": "john@gmail.com",
+			"type": "string"
+		},
+		{
+			"key": "admin_password",
+			"value": "john@123",
+			"type": "string"
+		},
+		{
+			"key": "instructor_username",
+			"value": "chris@gmail.com",
+			"type": "string"
+		},
+		{
+			"key": "instructor_password",
+			"value": "chris@123",
+			"type": "string"
+		},
+		{
+			"key": "student_username",
+			"value": "jessica@gmail.com",
+			"type": "string"
+		},
+		{
+			"key": "student_password",
+			"value": "jessica@123",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "course_id",
+			"value": ""
+		}
+	]
+}
