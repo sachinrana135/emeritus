@@ -37,14 +37,14 @@ public class UserController {
 
     @PostMapping
     @PreAuthorize("hasRole('SYS_ADMIN')")
-    ResponseEntity<Void> createUser(@RequestBody User user) {
+    ResponseEntity<String> createUser(@RequestBody User user) {
         User savedEntity = userService.save(user);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(savedEntity.getId())
                 .toUri();
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(location).body(savedEntity.getId());
     }
 
     @GetMapping("/{id}")

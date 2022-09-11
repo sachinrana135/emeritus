@@ -28,14 +28,14 @@ public class CourseController {
 
     @PostMapping
     @PreAuthorize("hasRole('INSTRUCTOR')")
-    ResponseEntity<Course> createCourse(@RequestBody Course course) {
+    ResponseEntity<String> createCourse(@RequestBody Course course) {
         Course savedEntity = courseService.save(course);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(savedEntity.getId())
                 .toUri();
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(location).body(savedEntity.getId());
     }
 
     @GetMapping("/{id}")

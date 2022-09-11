@@ -28,14 +28,14 @@ public class AssignmentController {
 
     @PostMapping
     @PreAuthorize("hasRole('INSTRUCTOR')")
-    public ResponseEntity<Assignment> create(@RequestBody Assignment assignment) {
+    public ResponseEntity<String> create(@RequestBody Assignment assignment) {
         Assignment savedAssignment = assignmentService.create(assignment);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(savedAssignment.getId())
                 .toUri();
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(location).body(savedAssignment.getId());
     }
 
     @PatchMapping(value = "/{userAssignmentId}")
