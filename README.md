@@ -57,10 +57,10 @@ Project is created with:
 * H2 console course database link - http://localhost:9051/course/h2-console
 * Download postman collection and run the services. Postman collection file URL -https://github.com/sachinrana135/mono_repo_emeritus/blob/main/Emeritus.postman_collection.json
 
-
-url: jdbc:h2:mem:emeritus
-username: sa
-password: password
+## H2 configuration
+ * url: jdbc:h2:mem:emeritus
+ * username: sa
+ * password: password
 
 ## APIs
 
