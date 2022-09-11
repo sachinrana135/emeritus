@@ -31,7 +31,8 @@ public class AssignmentServiceImpl implements AssignmentService {
 
     @Override
     public AssignmentUser assignAssignmentToStudent(AssignmentUser assignmentUser) {
-        courseUserRepository.findByUserIdAndCourseId(assignmentUser.getUserId(), assignmentUser.getAssignment().getCourse().getId()).orElseThrow(() -> new RuntimeException("Student is not enrolled in this course"));
+        Assignment assignment = assignmentRepository.findById(assignmentUser.getAssignment().getId()).orElseThrow(() -> new RuntimeException("Assignment with id " +  assignmentUser.getAssignment().getId() + " not found"));;
+        courseUserRepository.findByUserIdAndCourseId(assignmentUser.getUserId(), assignment.getCourse().getId()).orElseThrow(() -> new RuntimeException("Student is not enrolled in this course"));
         assignmentUser.setStatus(AssignmentStatus.ASSIGNED);
         return assignmentUserRepository.save(assignmentUser);
     }
