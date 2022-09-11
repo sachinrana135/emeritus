@@ -51,9 +51,12 @@ Project is created with:
 * Go to gateway root folder and use **./gradlew bootRun** to run the gateway service. Gateway service will run on port 9000.
 * Go to config root folder and use **./gradlew bootRun** to run the config service.
 * Go to user and course root folder and run the **./gradlew bootRun** command.
+* Run Zipkin server. ![https://zipkin.io/pages/quickstart]
 * All the api can be accessed on gateway port 9000.
 * H2 console user database link - http://localhost:9050/user/h2-console
 * H2 console course database link - http://localhost:9051/course/h2-console
+* Download postman collection and run the services. Postman collection file URL -https://github.com/sachinrana135/mono_repo_emeritus/blob/main/Emeritus.postman_collection.json
+
 
 url: jdbc:h2:mem:emeritus
 username: sa
@@ -64,3 +67,7 @@ password: password
 * [API Documentation](https://documenter.getpostman.com/view/2141799/2s7YSQYsRN)
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d39c67e3b4bc2dfbb007?action=collection%2Fimport)
+
+## Zipkin Integration
+
+![alt text](https://github.com/sachinrana135/mono_repo_emeritus/blob/main/zipkin-integration.png)
